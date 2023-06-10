@@ -6,6 +6,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 
+# Relaunch the browser window every 't' seconds, here, 5 minutes.
+t = 300
+
 # Define the URL you want to open, by default, it is set for the live stream of ICC WTC Final India vs Australia 2023
 # url = "https://www.example.com/"
 url = "https://www.hotstar.com/in/movies/ms-dhoni-the-untold-story/1000162617/watch?filters=content_type%3Dmovie"
@@ -44,10 +47,7 @@ while True:
         if check_volume_off(driver):
             driver.find_element(By.TAG_NAME,'body').send_keys('M')
 
-        # Relaunch after 't' seconds, here, 5 minutes.
-        t = 10
         time.sleep(t)
-
         if is_browser_closed(driver):
             break
         
