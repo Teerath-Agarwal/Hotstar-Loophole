@@ -2,9 +2,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
-import pyautogui
 
 # Define the URL you want to open, by default, it is set for the live stream of ICC WTC Final India vs Australia 2023
 # url = "https://www.example.com/"
@@ -38,12 +38,14 @@ while True:
     try:
         driver = webdriver.Chrome(service=Service(chrome_path), options=chrome_options)
         driver.get(url)
-        pyautogui.press('f')
+        driver.find_element(By.TAG_NAME,'body').send_keys('F')
+        time.sleep(1)
+        
         if check_volume_off(driver):
-            pyautogui.press('m')
+            driver.find_element(By.TAG_NAME,'body').send_keys('M')
 
         # Relaunch after 't' seconds, here, 5 minutes.
-        t = 300
+        t = 10
         time.sleep(t)
 
         if is_browser_closed(driver):
