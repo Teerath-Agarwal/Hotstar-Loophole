@@ -1,3 +1,4 @@
+import os
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -6,25 +7,42 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 
-# Relaunch the browser window every 't' seconds, here, 5 minutes.
+url = "https://www.hotstar.com/in/movies/ms-dhoni-the-untold-story/1000162617/watch?filters=content_type%3Dmovie"
 t = 300
 
-# Define the URL you want to open, by default, it is set for the live stream of ICC WTC Final India vs Australia 2023
-# url = "https://www.example.com/"
-url = "https://www.hotstar.com/in/movies/ms-dhoni-the-untold-story/1000162617/watch?filters=content_type%3Dmovie"
-# url = "https://www.hotstar.com/in/sports/cricket/icc-world-test-championship-2023/988/final-australia-vs-india-day-4/1540023554/m-708280/live/watch?filters=content_type%3Dsport_live"
+if os.path.exists("address.txt"):
+    with open("address.txt", "r") as file:
+        url = file.read()
+
+if os.path.exists("time_.txt"):
+    with open("time_.txt", "r") as file:
+        t = int(file.read())
+
+change = input("Do you want to change the address or looptime? (Y/N): ")
+
+if change.lower() == "y" or change.lower() == "yes":
+    new_t = int(input("Enter the new value of looptime (Enter 0 to use previous value): "))
+    if new_t:
+        t = new_t
+        with open("time_.txt", "w") as file:
+            file.write(str(t))
+    new_url = input("Enter the new address (URL) (Enter # to use previous value): ")
+    if len(new_url) > 1:
+        url = new_url
+        with open("address.txt", "w") as file:
+            file.write(str(url))
 
 chrome_options = Options()
 
-# Use chrome by default, or Change path to use your own web browser. 
-chrome_options.binary_location = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+# Use chrome by default, or Change path to use your own web browser.
+# chrome_options.binary_location = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 
 chrome_options.add_argument("--incognito")
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_experimental_option('useAutomationExtension', False)
 
 # Set the path to the ChromeDriver. Make sure to add correct driver path if the web browser is not chromium based.
-chrome_path = 'C:\\Users\\teera\\OneDrive\\Desktop\\Hotstar_Loophole\\chromedriver_win32\\chromedriver.exe'
+chrome_path = '.\\chromedriver_win32\\chromedriver.exe'
 
 def is_browser_closed(driver):
     try:
