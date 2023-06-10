@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import WebDriverException
 import pyautogui
 
 # Define the URL you want to open, by default, it is set for the live stream of ICC WTC Final India vs Australia 2023
@@ -22,6 +23,12 @@ chrome_options.add_experimental_option('useAutomationExtension', False)
 # Set the path to the ChromeDriver. Make sure to add correct driver path if the web browser is not chromium based.
 chrome_path = 'C:\\Users\\teera\\OneDrive\\Desktop\\Hotstar_Loophole\\chromedriver_win32\\chromedriver.exe'
 
+def is_browser_closed(driver):
+    try:
+        driver.title
+        return False
+    except WebDriverException:
+        return True
 
 def check_volume_off(driver):
     elements = driver.find_elements(By.CSS_SELECTOR, 'i.icon-volume-off-line')
@@ -38,6 +45,9 @@ while True:
         # Relaunch after 't' seconds, here, 5 minutes.
         t = 300
         time.sleep(t)
+
+        if is_browser_closed(driver):
+            break
         
     except Exception as e:
         print("An error occurred:", str(e))
