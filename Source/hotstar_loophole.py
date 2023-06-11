@@ -10,12 +10,16 @@ from selenium.common.exceptions import WebDriverException
 url = "https://www.hotstar.com/in/movies/ms-dhoni-the-untold-story/1000162617/watch?filters=content_type%3Dmovie"
 t = 300
 
-if os.path.exists("address.txt"):
-    with open("address.txt", "r") as file:
+datf = 'data'
+add_path = os.path.join(datf, 'url.txt')
+tm_path = os.path.join(datf, 'tm.txt')
+
+if os.path.exists(add_path):
+    with open(add_path, "r") as file:
         url = file.read()
 
-if os.path.exists("time_.txt"):
-    with open("time_.txt", "r") as file:
+if os.path.exists(tm_path):
+    with open(tm_path, "r") as file:
         t = int(file.read())
 
 change = input("Do you want to change the address or looptime? (Y/N): ")
@@ -24,12 +28,12 @@ if change.lower() == "y" or change.lower() == "yes":
     new_t = int(input("Enter the new value of looptime (Enter 0 to use previous value): "))
     if new_t:
         t = new_t
-        with open("time_.txt", "w") as file:
+        with open(tm_path, "w") as file:
             file.write(str(t))
     new_url = input("Enter the new address (URL) (Enter # to use previous value): ")
     if len(new_url) > 1:
         url = new_url
-        with open("address.txt", "w") as file:
+        with open(add_path, "w") as file:
             file.write(str(url))
 
 chrome_options = Options()
