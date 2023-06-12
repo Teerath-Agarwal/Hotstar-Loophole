@@ -26,7 +26,7 @@ This is simple program which avails free sports on Hotstar. Hotstar allow users 
 
 ## Installation
 
-1. Download the latest stable release.
+1. Download the latest stable release or [Click here](https://github.com/Teerath-Agarwal/Hotstar-Loophole/releases/download/v1.0.0/hotstar_loophole.zip).
 2. Extract the content from zip file using a zip extractor (such as Win-Rar).
 3. Execute the executable file.
 
