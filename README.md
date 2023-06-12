@@ -26,10 +26,9 @@ This is simple program which avails free sports on Hotstar. Hotstar allow users 
 
 ## Installation
 
-1. Clone or downlaod the repository or [click here](https://github.com/Teerath-Agarwal/Hotstar-Loophole/archive/refs/heads/master.zip).
+1. Download the latest stable release.
 2. Extract the content from zip file using a zip extractor (such as Win-Rar).
-3. End User may delete/ignore the Source folder. Developers may delete/ignore the Distribution folder.
-4. End User must again extract the the final application from the Distribution folder.
+3. Execute the executable file.
 
 ## Usage
 
